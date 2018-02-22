@@ -7,12 +7,13 @@ from .models import Fiche
 def list_fiche(request):
 
     sort = request.GET.get('sort')
+    fiches = Fiche.objects.all()
     if sort == "client":
         fiches = Fiche.objects.all().order_by('client__name')
     elif sort == "project_title":
         fiches = Fiche.objects.all().order_by('project_title')
 
     context = {
-        "fiches": fiches
+        "fiches": fiches,
     }
     return render(request, 'home.html', context=context)
